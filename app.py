@@ -50,8 +50,8 @@ def normalize_corpus(corpus, html_stripping=True, contraction_expansion=True,
 
     return normalized_corpus
 
-model_file = 'C:\Users\saimu\Documents\Ml_lab\ml_project\web_app\logistic_model.pkl'  # Placeholder for actual model
-vectorizer_file = 'C:\Users\saimu\Documents\Ml_lab\ml_project\web_app\vectorizer.pkl'  # Placeholder for actual vectorizer
+model_file = 'C:/Users/saimu/Documents/Ml_lab/ml_project/web_app/logistic_model.pkl'  
+vectorizer_file ='C:/Users/saimu/Documents/Ml_lab/ml_project/web_app/vectorizer.pkl'  # Using forward slashes
 
 loaded_model = joblib.load(model_file) 
 loaded_vectorizer = joblib.load(vectorizer_file) 
