@@ -2,6 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import re
 from collections import defaultdict, Counter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -50,11 +51,13 @@ def normalize_corpus(corpus, html_stripping=True, contraction_expansion=True,
 
     return normalized_corpus
 
-model_file = 'C:/Users/saimu/Documents/Ml_lab/ml_project/web_app/logistic_model.pkl'  
-vectorizer_file ='C:/Users/saimu/Documents/Ml_lab/ml_project/web_app/vectorizer.pkl'  # Using forward slashes
+import os
 
-loaded_model = joblib.load(model_file) 
-loaded_vectorizer = joblib.load(vectorizer_file) 
+model_file = os.path.join("logistic_model.pkl")
+vectorizer_file = os.path.join("vectorizer.pkl")
+
+loaded_model = joblib.load(model_file)
+loaded_vectorizer = joblib.load(vectorizer_file)
 
 
 def analyze_chat(file_path, model, vectorizer):
@@ -129,9 +132,14 @@ if uploaded_file is not None:
     ax.set_ylabel("Message Count")
     ax.set_title("Sentiment Count Per Person (WhatsApp Chat)")
     ax.legend()
+    fig2, ax2 = plt.subplots()
+    ax2.pie([pos, neg], labels=['Positive 😊', 'Negative 😞'], autopct='%1.1f%%', colors=['green', 'red'])
+    ax2.set_title('Overall Sentiment Distribution')
+    st.pyplot(fig2)
 
     # Display the plot
     st.pyplot(fig)
+    
 
 else:
     st.write("Please upload a WhatsApp chat file to get started.")
